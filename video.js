@@ -40,7 +40,7 @@ function update(vid) {
                     $("#sub").addClass("fading").stop().animate({ opacity:0, top:"-=30px" }, "medium", "swing");
         } else {
                if ($("#sub").hasClass("fading"))
-                    $("#sub").removeClass("fading").stop().animate({opacity:1,top:"410px"},1).html('');       
+                    $("#sub").removeClass("fading").stop().animate({opacity:1,top:"330px"},1).html('');       
         }
         $("subtitle.good:last").each(function() { 
                 if (!$(this).hasClass("on")) {
@@ -63,6 +63,17 @@ function update(vid) {
                         $(this).stop().fadeTo("fast",1);
                 }).parent().show();
         });
+        $("location").each(function() {
+            var from = to_secs($(this).attr("from")),
+            to = to_secs($(this).attr("to"));
+            var tar = $(this).attr("target");
+            var latitude = $(this).attr("lat");
+            var longitude = $(this).attr("long");
+            var zoomRange = $(this).attr("zoom");
+            if (from<t&&to>t) { 
+                drawmap(latitude,longitude,zoomRange);
+            }
+        });
         lt = t;
 }
 
@@ -72,3 +83,14 @@ function to_secs(time) {
 	return parseInt(t[0]*60,10) + parseInt(t[1],10);
 }
 
+// load a google map
+function drawmap(latitude,longitude,zoomRange) {
+var initialLocation = new google.maps.LatLng(latitude, longitude);
+
+  var myOptions = {
+    zoom: parseInt(zoomRange),
+    mapTypeId: google.maps.MapTypeId.HYBRID
+  };
+  var map = new google.maps.Map(document.getElementById("map"), myOptions);
+  map.setCenter(initialLocation);
+}
