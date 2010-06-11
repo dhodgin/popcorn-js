@@ -27,8 +27,8 @@ function update(vid) {
         t = vid.currentTime; 
         if (lt>t) $("#sub span").fadeTo(1,.3);
         $("subtitle").each(function() {
-                var from = to_secs($(this).attr("from")),
-                to = to_secs($(this).attr("to"));
+                var from = to_secs($(this).attr("in")),
+                to = to_secs($(this).attr("out"));
                 $(this).removeClass("good");
                 if (from<t&&to>t) { 
                         has_sub=true; 
@@ -53,27 +53,51 @@ function update(vid) {
                        });
                        $("#sub span").stop().fadeTo(1,.3, function() { $(this).show(); });
                 }
-                var from = to_secs($(this).attr("from")),
-                to = to_secs($(this).attr("to")),
+                var from = to_secs($(this).attr("in")),
+                to = to_secs($(this).attr("out")),
                 perc = ((t-from)/(to-from)),
                 num_letters = $(this).text().length*perc,
                 i = 0;
                 $("#sub span").each(function() { 
-                        if (i++>num_letters) return;
+                        //if (i++>num_letters) return;
                         $(this).stop().fadeTo("fast",1);
                 }).parent().show();
         });
+        
         $("location").each(function() {
-            var from = to_secs($(this).attr("from")),
-            to = to_secs($(this).attr("to"));
+            var from = to_secs($(this).attr("in")),
+            to = to_secs($(this).attr("out"));
             var tar = $(this).attr("target");
             var latitude = $(this).attr("lat");
             var longitude = $(this).attr("long");
             var zoomRange = $(this).attr("zoom");
             if (from<t&&to>t) { 
-                drawmap(latitude,longitude,zoomRange);
+                drawmap(latitude,longitude,zoomRange,tar);
             }
         });
+        
+        var people = {
+          contains: {},
+          toString: function() {
+          var r = [];
+          for (var i in this.contains) {
+            r.push(" " + this.contains[i]);
+          }
+          return r.toString();
+          }
+        };
+        $("tag").each(function() {
+          var from = to_secs($(this).attr("in")),
+          to = to_secs($(this).attr("out"));
+          people.contains[$(this).text()] = $(this).text();
+          if (from < t && to > t) {
+            $("#inthisvideo").html(people.toString());
+          } else {
+            delete people.contains[$(this).text()];
+            $("#inthisvideo").html(people.toString());
+          }
+        });
+      
         lt = t;
 }
 
@@ -84,13 +108,13 @@ function to_secs(time) {
 }
 
 // load a google map
-function drawmap(latitude,longitude,zoomRange) {
+function drawmap(latitude,longitude,zoomRange,tar) {
 var initialLocation = new google.maps.LatLng(latitude, longitude);
 
   var myOptions = {
     zoom: parseInt(zoomRange),
     mapTypeId: google.maps.MapTypeId.HYBRID
   };
-  var map = new google.maps.Map(document.getElementById("map"), myOptions);
+  var map = new google.maps.Map(document.getElementById(tar), myOptions);
   map.setCenter(initialLocation);
 }

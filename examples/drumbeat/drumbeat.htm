@@ -1,0 +1,173 @@
+﻿<html>
+<head>
+    <title>html5 video demo</title>
+
+    <script src="http://code.jquery.com/jquery.js"></script>
+
+    <script src="http://google.com/jsapi"></script>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <script>        google.load("language", "1");</script>
+
+    <script src="../../video.js"></script>
+
+    <style type="text/css" media="screen">
+        body
+        {
+            background-color: #eee;
+        }
+        #container
+        {
+            width: 1020px;
+            margin: auto 40px;
+            border: 1px solid #ccc;
+            background: white;
+            padding: 20px;
+            position: relative;
+        }
+        #sub
+        {
+            position: absolute;
+            top: 330px;
+            left: 40px;
+            color: white;
+            font-weight: bold;
+            font-family: sans-serif;
+            text-shadow: black 3px 3px 3px;
+            width: 660px;
+            font-size: 25px;
+        }
+        select
+        {
+            font-size: 30px;
+            float: left;
+        }
+        #credit
+        {
+            font-size: 25px;
+            color: #999;
+            float: right;
+            padding-top: 3px;
+        }
+        #credit a
+        {
+            color: #555;
+        }
+        .clear
+        {
+            clear: both;
+        }
+        #mapblock
+        {
+            float: right;
+            width: 300px;
+            height: 300px;
+        }
+        .boxes
+        {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #ccc;
+        }
+        #container1
+        {
+            width: 700px;
+        }
+        #container4
+        {
+            font-size: 25px;
+            color: #999;
+            float: left;
+        }
+        #inthisvideo
+        {
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="mapblock">
+            <div id="container2" class="boxes">
+            </div>
+            <br />
+            <div id="container3" class="boxes" style="height: 70px;">
+                Filmed in:<br />
+                Montreal from 0:00-1:00<br />
+                Seneca in Toronto 1:01-end
+            </div>
+        </div>
+        <div id="container1">
+            <video width="700px" src="../../video/webMadeMovies.ogg" ontimeupdate="update(this)" controls="true"> 
+                <manifest>
+                    <person id="celine" url="http://www.celinecelines.com/," name="Celine" salutation="Miss." > 
+                        <url type="homepage" source="http://www.celinecelines.com/" description="Celine's Homepage" />
+                        <url type="twitter" source="http://twitter.com/celinecelines" description="Celine's Twitter" />
+                    </person>
+                    <person id="brian" name="brian" >
+                        <url type="twitter" source="http://twitter.com/bchirls" description="Brian's Twitter" />
+                    </person>
+                    <person id="mona" name="Mona" >
+                        <url type="homepage" source="http://monakasra.com/" description="Mona's Homepage"/>
+                    </person>
+                    <person id="dave" name="Dave" >
+                        <url type="twitter" source="http://twitter.com/academicdave" description="Dave's Twitter" />
+                    </person>
+                    <person id="noah" name="Noah" >
+                        <url type="twitter" source="http://twitter.com/noahworkman" description="Noah's Twitter" />
+                    </person>
+                    <place id="1" type="building" geotag="http://maps.google.ca/maps/place?cid=7207111453545228773&q=austin+convention+center&hl=en&cd=2&ei=dLQPTO6yOJzmNOCykZsD&dtab=0&sll=30.267153,-97.743061&sspn=0.583554,1.454315&ie=UTF8&ll=31.012925,-99.195557&spn=0,0&z=9&iwloc=B" name="Austin, TX">
+                    <place id="2" type="city" geotag="http://maps.google.ca/maps?f=q&source=s_q&hl=en&geocode=&q=sao+paulo&sll=49.891235,-97.15369&sspn=27.954218,93.076172&ie=UTF8&hq=&hnear=S%C3%A3o+Paulo,+Brazil&z=9" url="http://en.wikipedia.org/wiki/S%C3%A3o_Paulo" name="Sao Paulo, Brazil">
+                </manifest>
+                <timeline>
+                    <attribution id="3" in="0:36" nameofwork="A Shared Culture" copyrightholder="Jesse Dylan" license="CC-BY-NC"  licenseurl="http://creativecommons.org/licenses/by-nc/2.0/">
+                    <subtitles>
+                        <subtitle in="0:05" out="0:07">Hello! My name is Celines Celine</subtitle>
+                        <subtitle in="0:07" out="0:09">And I help the Internet be easier</subtitle>
+                        <subtitle in="0:09" out="0:12">by making things easier</subtitle>
+                        <subtitle in="0:15" out="0:17">My name is Mona Kasra</subtitle>
+                        <subtitle in="0:17" out="0:18">and I'm building a better internet</subtitle>
+                    <subtitles>
+                    <map>
+                        <location in="0:11" out="0:12" lat="30.262" long="-97.74" target="container2" zoom="13" placeid="1"></location>
+                        <location in="0:32" out="0:33" lat="-23.54" long="-46.635" target="container2" zoom="13" placeid="2"></location>
+                    </map>
+<!--                    <data in="0:05" out="0:11" personId="celine" type="twitter">
+                    <data in="0:12" out="0:15" personId="brian" type="twitter">
+                    <data in="0:15" out="0:18" personId="mona" type="homepage">
+                    <data in="0:21" out="0:23" personId="dave" type="twitter">
+                    <data in="0:23" out="0:25" personId="noah" type="twitter">-->
+                    <tagthisvideo>
+                        <tag in="0:00" out="0:12">Some kid</tag>
+                        <tag in="0:31" out="0:41">Some really long tag to see how far off the page it goes, or maybe it wraps around? If you see this, it means you know while you are reading it what happens, and I do not know what happens while I write it... so in a way, you know what happens before me.</tag>
+                        <tag in="0:04" out="0:20">Overlap guy</tag>
+                        <tag in="0:15" out="0:30">Some guy</tag>
+                    </tagthisvideo>
+                </timeline>
+            </video>
+        </div>
+        <div id="sub" border="2">
+        </div>
+        <br />
+        <div id="bottom">
+            <select id="language">
+                <option val="en">English</option>
+                <option val="es">Spanish</option>
+                <option val="fr">French</option>
+                <option val="de">German</option>
+                <option val="ja">Japanese</option>
+            </select>
+            <div id="credit">
+                with help from <a href="http://google.com/translate">Google Translate</a> and <a
+                    href="http://jquery.com">jQuery</a></div>
+            <br />
+            <br />
+            <br />
+            <div id="container4">
+                In this video:<span id="inthisvideo"></span></div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</body>
+</html>
