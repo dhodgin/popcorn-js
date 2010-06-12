@@ -97,7 +97,6 @@ function update(vid) {
             $("#inthisvideo").html(people.toString());
           }
         });
-//<attribution id="3" in="0:36" out="0:37" nameofwork="A Shared Culture" copyrightholder="Jesse Dylan" license="CC-BY-NC"  licenseurl="http://creativecommons.org/licenses/by-nc/2.0/">        
         $("attribution").each(function() {
             var from = to_secs($(this).attr("in")),
             to = to_secs($(this).attr("out"));
